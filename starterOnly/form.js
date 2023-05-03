@@ -1,65 +1,102 @@
-// Ajouter l'attribut novalidate lors du chargement du JS
-var forms = document.querySelectorAll('.validate');
-for (var i = 0; i < forms.length; i++) {
-    forms[i].setAttribute('novalidate', true);
-}
+// Get the form element
+const form = document.forms["reserve"];
 
+// Get the input elements
+const { first, last, email, birthdate, location } = form;
 
-// Valider le champ
-var hasError = function (field) {
+// Get the span element for displaying the validation message
+const validMessage = document.getElementById("validMessage");
 
-   // Ne pas valider les soumissions, les boutons, les entrées de fichier et de réinitialisation, et les champs désactivés.
-    if (field.disabled || field.type === 'file' || field.type === 'reset' || field.type === 'submit' || field.type === 'button') return;
+// Define a function to validate the form inputs
+const validate = (event) => {
+  // Prevent the default behavior of the submit input
+  event.preventDefault();
 
-    // Obtenir la validité
-    var validity = field.validity;
+  // Initialize a variable to store the validation status
+  let isValid = true;
 
-// Si elle est valide, elle renvoie null
-    if (validity.valid) return;
+  // Loop through the input elements
+  for (let input of form.elements) {
+    // Get the parent div element of the input
+    const div = input.parentElement;
 
-// Si le champ est obligatoire et vide
-    if (validity.valueMissing) return 'Veuillez remplir ce champ.';
+    // Check if the input is required and has a value
+    if (input.required && input.value) {
+      // Set the data-error-visible attribute of the div to false
+      div.setAttribute("data-error-visible", "false");
+    } else if (input.required && !input.value) {
+      // Set the data-error-visible attribute of the div to true
+      div.setAttribute("data-error-visible", "true");
 
-// Si ce n'est pas le bon type
-    if (validity.typeMismatch) {
-
-        // Email
-        if (field.type === 'email') return 'Veuillez saisir une adresse électronique.';
-
+      // Set the isValid variable to false
+      isValid = false;
     }
+  }
 
- // Si trop court
-    if (validity.tooShort) return 'Veuillez allonger ce texte à ' + field.getAttribute('minLength') + ' caractères ou plus. Vous utilisez actuellement ' + field.value.length + ' caractères.';
+  // Check if the location radio buttons are checked
+  let locationChecked = false;
 
-    // Si trop long
-    if (validity.tooLong) return 'Veuillez raccourcir ce texte au maximum ' + field.getAttribute('maxLength') + ' caractères. Vous utilisez actuellement ' + field.value.length + ' caractères.';
+  // Loop through the location radio buttons
+  for (let radio of location) {
+    // Get the parent div element of the radio button
+    const div2 = radio.parentElement;
 
- // Si le nombre saisi n'est pas un nombre
-    if (validity.badInput) return 'Veuillez saisir un numéro.';
+    // Check if the radio button is checked
+    if (radio.checked) {
+      // Set the locationChecked variable to true
+      locationChecked = true;
 
-// Si une valeur numérique ne correspond pas à l'intervalle d'étape
-    if (validity.stepMismatch) return 'Veuillez sélectionner une valeur valide.';
-
-   // Si un champ numérique dépasse la valeur maximale
-    if (validity.rangeOverflow) return 'Veuillez sélectionner une valeur ne dépassant pas ' + field.getAttribute('max') + '.';
-
-    // Si un champ numérique est inférieur à la valeur minimale
-    if (validity.rangeUnderflow) return 'Veuillez choisir une valeur qui nest pas inférieure à' + field.getAttribute('min') + '.';
-  
-    // Si le motif ne correspond pas
-    if (validity.patternMismatch) {
-
-        // Si des informations sur le motif sont incluses, renvoyer une erreur personnalisée
-        if (field.hasAttribute('title')) return field.getAttribute('title');
-
-        // Sinon, une erreur générique
-        return 'Veuillez respecter le format demandé.';
-
+      // Break out of the loop
+      break;
     }
+  }
 
-    // En cas d'échec, renvoyer une erreur générique.
-    return 'La valeur que vous avez saisie pour ce champ nest pas valide.';
+  // Check if the locationChecked variable is false
+  if (!locationChecked) {
+    // Set the data-error-visible attribute of the div to true
+    div2.setAttribute("data-error-visible", "true");
 
+    // Set the isValid variable to false
+    isValid = false;
+  } else {
+    // Set the data-error-visible attribute of the div to false
+    div2.setAttribute("data-error-visible", "false");
+  }
+
+  // Check if the isValid variable is true
+  if (isValid) {
+    // Display a success message
+    validMessage.innerHTML =
+      "Your reservation has been submitted successfully. Thank you!";
+    validMessage.style.color = "green";
+
+    // Submit the form
+    form.submit();
+  } else {
+    // Display an error message
+    validMessage.innerHTML =
+      "Please fill in all the required fields correctly.";
+    validMessage.style.color = "red";
+  }
+
+  // Return the isValid variable as the validation result
+  return isValid;
 };
 
+// Get the first checkbox element
+const checkbox1 = form["checkbox1"];
 
+// Add an event listener to the checkbox
+checkbox1.addEventListener("change", () => {
+  // Get the parent div element of the checkbox
+  const div3 = checkbox1.parentElement;
+
+  // Check if the checkbox is checked
+  if (checkbox1.checked) {
+    // Set the data-error-visible attribute of the div to false
+    div3.setAttribute("data-error-visible", "false");
+  } else {
+    // Set the data-error-visible attribute of the div to true
+    div3.setAttribute("data-error-visible", "true");
+  }
+});
