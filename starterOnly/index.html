@@ -62,10 +62,12 @@
               method="get"
               onsubmit="return validate();"
               novalidate
+              id="reserve";
             >
             <span id="validMessage"></span><br>
               <div
                 class="formData"
+                id="firstNameData"
                >
                 <label>Prénom</label><br>
                 <input
@@ -74,13 +76,12 @@
                   id="first"
                   name="first"
                   minlength="2"
-                  data-validate="text"
-                  data-error="Veuillez entrer 2 caractères ou plus pour le champ du Prénom."
-                  required
+                 
                 /><br>
               </div>
               <div
                 class="formData"
+                id="LastNameData"
               >
                 <label>Nom</label><br>
                 <input
@@ -88,27 +89,24 @@
                   type="text"
                   id="last"
                   name="last"
-                  data-validate="text"
-                  required
-                  data-error="Vous devez saisir votre nom."
-                 
+            
                 /><br>
               </div>
               <div
                 class="formData"
-                data-error="Vous devez saisir une adresse électronique valide">
+                id="emailData">
                 <label>E-mail</label><br>
                 <input
                   class="text-control"
                   type="email"
                   id="email"
                   name="email"
-                  required
-                  data-validate="email"
+                
                 /><br>
               </div>
               <div
                 class="formData"
+                id="firstNameData"
                 >
                 <label>Date de naissance</label><br>
                 <input
@@ -116,9 +114,7 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                  data-validate="date"
-                  required
-                  data-error="Vous devez entrer votre date de naissance."
+                
                 /><br>
               </div>
               <div
@@ -246,6 +242,6 @@
       </p>
     </footer>
     <script src="modal.js"></script>
-    <script src="validation.js"></script>
+   
   </body>
 </html>
