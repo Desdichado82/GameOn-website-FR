@@ -60,7 +60,6 @@
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validate();"
               novalidate
               id="reserve";
             >
@@ -81,7 +80,7 @@
               </div>
               <div
                 class="formData"
-                id="LastNameData"
+                id="lastNameData"
               >
                 <label>Nom</label><br>
                 <input
@@ -106,7 +105,7 @@
               </div>
               <div
                 class="formData"
-                id="firstNameData"
+                id="birthData"
                 >
                 <label>Date de naissance</label><br>
                 <input
@@ -118,14 +117,17 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData"
+                id="quantityData">
                 <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" data-validate="number" data-error="">
               </div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
               <div
                 class="formData"
+               
                >
+               <p  id="locationData"></p>
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -203,12 +205,11 @@
               </div>
 
               <div
-                class="formData">
+                class="formData" id="checkboxData">
                 <input
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
-                  data-error="Vous devez vérifier que vous acceptez les termes et conditions."
                   checked
                   data-validate="checkbox"
                   
@@ -226,9 +227,9 @@
                 <br>
               </div>
               <input
+                id="submitBtn"
                 class="btn-submit"
                 type="submit"
-                class="button"
                 value="C'est parti"
               />
             </form>
@@ -242,6 +243,7 @@
       </p>
     </footer>
     <script src="modal.js"></script>
+    <script src="validation.js"></script>
    
   </body>
 </html>
