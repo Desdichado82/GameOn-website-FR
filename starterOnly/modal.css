@@ -310,6 +310,17 @@ input[data-error]::after {
   opacity: 1;
   cursor: pointer;
   transform: scale(0.7);
+ 
+   /* Added a transition for the transform property */
+   transition: transform 0.3s ease-in-out;
+     /* Rotate the element by 45 degrees */
+ 
+}
+
+.close:hover {
+  /* Scale up the element when it's hovered */
+  /* Rotate the element by 45 degrees */
+  transform: rotate(180deg);
 }
 .close:before,
 .close:after {
