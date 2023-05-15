@@ -23,11 +23,16 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
+//// projet Code
+
 const formReset = document.forms["reserve"];
 const resetForm = () => {
   //reset the form inputs
   formReset.reset();
 }
+
+
+
 
 // close modal form 
 closeBtn.addEventListener('click', () => {
@@ -40,6 +45,12 @@ closeBtn.addEventListener('click', () => {
 }
   resetForm();
 });
+
+let submitBtn = document.getElementById('submitBtn');
+submitBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  validate();
+})
 
 
 
@@ -220,10 +231,6 @@ function formConfirmation(){
   modal.style.display = "block";
 }
 
-let submitBtn = document.getElementById('submitBtn');
-submitBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  validate();
-})
+
 
 
