@@ -120,7 +120,14 @@ let lastControl = () => {
   let last = document.getElementsByName('last')[0].value;
   let lastNameData = document.querySelector('#lastNameData');
   // check conditions with if statement
-  if (last == '') {
+   
+  if (last.length < 2) {
+    // set the error message 
+      lastNameData.setAttribute('data-error-visible', true);
+      lastNameData.setAttribute('data-error', 'le nom famille doit comporter au moins deux caractères');
+      return false;
+  }
+  else if (last == '') {
       lastNameData.setAttribute('data-error-visible', true);
       lastNameData.setAttribute('data-error', 'le champ ne doit pas être vide');
       return false;
